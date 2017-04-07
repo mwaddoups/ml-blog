@@ -5,16 +5,12 @@ from scipy.optimize import minimize
 from functools import partial
 
 class LinearRegression:
-    def __init__(self, X, y, scaled=True):
+    def __init__(self, X, y):
         self.m = X.shape[0]
         self.n = X.shape[1]
 
-        if scaled:
-            self.x_scale = (np.mean(X, axis=0), np.std(X, axis=0))
-            self.y_scale = (np.mean(X, axis=0), np.std(X, axis=0))
-        else:
-            self.x_scale = (0, 1)
-            self.y_scale = (0, 1)
+        self.x_scale = (np.mean(X, axis=0), np.std(X, axis=0))
+        self.y_scale = (np.mean(X, axis=0), np.std(X, axis=0))
         
         self.X = self.add_ones(self.scale_inputs(X, self.x_scale))
         self.y = self.scale_inputs(y, self.y_scale)
