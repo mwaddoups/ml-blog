@@ -10,8 +10,8 @@ class LinearRegression:
         self.n = X.shape[1]
 
         self.x_scale = (np.mean(X, axis=0), np.std(X, axis=0))
-        self.y_scale = (np.mean(X, axis=0), np.std(X, axis=0))
-        
+        self.y_scale = (np.mean(y, axis=0), np.std(y, axis=0))
+       
         self.X = self.add_ones(self.scale_inputs(X, self.x_scale))
         self.y = self.scale_inputs(y, self.y_scale)
 
@@ -21,10 +21,10 @@ class LinearRegression:
         return (X - scale[0]) / scale[1]
     
     def add_ones(self, X):    
-        return np.hstack([np.ones((self.m, 1)), X])    
+        return np.hstack([np.ones((X.shape[0], 1)), X])    
     
     def predict(self, X):
-        X = self.add_ones(self.scale_inputs(X))
+        X = self.add_ones(self.scale_inputs(X, self.x_scale))
         y = self.hypothesis(X, self.theta)
         return y * self.y_scale[1] + self.y_scale[0]
 
