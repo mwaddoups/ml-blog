@@ -39,7 +39,7 @@ class LogisticRegression:
     def cost_function(self, theta, lamda):
         hyp = self.hypothesis(self.X, theta)
         J_fit = (-1 / self.m) * np.sum(self.y * np.log(hyp) + (1 - self.y) * np.log(1 - hyp))
-        J_reg = lamda * np.sum(np.power(theta[1:], 2)) # Omitting the constant term
+        J_reg = (lamda / (2 * self.m)) * np.sum(np.power(theta[1:], 2)) # Omitting the constant term
         return J_fit + J_reg
 
     def grad(self, theta, lamda):

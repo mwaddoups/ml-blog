@@ -32,7 +32,7 @@ class LinearRegression:
 
     def cost_function(self, theta, lamda):
         J_fit = (1 / self.m) * np.sum(0.5 * np.power(self.hypothesis(self.X, theta) - self.y, 2))
-        J_reg = lamda * np.sum(np.power(theta[1:], 2)) # Omitting the constant term
+        J_reg = (lamda / (2 * self.m)) * np.sum(np.power(theta[1:], 2)) # Omitting the constant term
         return J_fit + J_reg
 
     def grad(self, theta, lamda):
